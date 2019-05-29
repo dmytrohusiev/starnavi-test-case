@@ -1,0 +1,118 @@
+.Container {
+	position: relative;
+	transition: margin 0.15s ease-in-out;
+}
+
+.Container input,
+.Container textarea {
+	width: 100%;
+	height: 100%;
+	transition: 0.15s border-color ease-out, 0.15s border-width ease-out;
+	-webkit-appearance: none;
+	background-color: transparent;
+	color: #555;
+	padding: 0.5rem 0.5rem 0.5rem 2rem;
+	font-size: 1rem;
+	font-weight: lighter;
+	border: none;
+	border-bottom: 1px solid #0971b7;
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;
+	word-break: break-word;
+	resize: none;
+}
+
+.Container textarea {
+	height: 200%;
+	padding-left: 0.5rem;
+}
+
+.Container.Error input {
+	padding-right: 1.5rem;
+}
+
+.Icon {
+	position: absolute;
+	font-size: 1.2rem !important;
+	width: 1.2rem !important;
+	height: 1.2rem;
+	left: 0.25rem;
+	top: calc(50% - 1.2rem / 2);
+}
+
+.Container label {
+	position: absolute;
+	color: #808080;
+	left: 2rem;
+	top: calc(50% - 0.5rem);
+	width: fit-content;
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: 100%;
+	line-height: 100%;
+	transition: all 0.15s ease-in-out;
+	pointer-events: none;
+}
+.NoIcon label {
+	left: 0.5rem;
+}
+
+.NoIcon input {
+	padding-left: 0.5rem;
+}
+
+.Container input:focus + label,
+.Container.Active label {
+	transform: translateY(-170%);
+	font-size: 80%;
+}
+
+.Container textarea:focus + label,
+.Container.Active textarea + label {
+	transform: translateY(-350%);
+	font-size: 80%;
+}
+
+.Focus {
+	position: absolute;
+	bottom: 1px;
+	left: 0;
+	height: 1px;
+	width: 100%;
+	transform: scaleX(0.001) translateX(50%);
+	transition: all 0.4s ease-in-out;
+	border-bottom: 1px solid transparent;
+}
+
+.Container input:focus ~ .Focus,
+.Container textarea:focus ~ .Focus {
+	border-bottom-color: #2e3355;
+	transform: scaleX(1) translateX(0);
+}
+
+.Container textarea:focus ~ .Focus {
+	bottom: 8px;
+}
+
+.Error p {
+	position: absolute;
+	width: 100%;
+	font-size: 0.75rem;
+	top: 110%;
+	left: 0;
+	color: #f26522;
+	text-align: left;
+}
+
+.Error label,
+.Error :global(.material-icons) {
+	color: #f26522 !important;
+}
+
+.ErrorIcon {
+	position: absolute;
+	right: 0.5rem;
+	width: 1rem;
+	height: 1rem;
+}

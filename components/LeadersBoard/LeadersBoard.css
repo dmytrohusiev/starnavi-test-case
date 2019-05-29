@@ -1,0 +1,19 @@
+.Leader {
+	background-color: #cfd8dc;
+	border-radius: 4px;
+	margin-bottom: 4px;
+	padding: 0.5rem 15px;
+	color: #777d7f;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.Leader > div {
+	flex-basis: 40%;
+	max-width: 40%;
+	font-size: 1.5rem;
+}
+.Leader > div:last-child {
+	text-align: right;
+}

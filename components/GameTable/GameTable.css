@@ -1,0 +1,31 @@
+.Container {
+	margin: 2rem auto;
+	width: fit-content;
+	height: fit-content;
+	border: 1px solid lightgray;
+}
+
+.Row {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.Cell {
+	width: 30px;
+	height: 30px;
+	background-color: transparent;
+	border: 1px solid lightgray;
+	user-select: none;
+}
+
+.Cell[data-value="1"] {
+	background-color: mediumturquoise;
+}
+
+.Cell[data-value="2"] {
+	background-color: mediumseagreen;
+}
+
+.Cell[data-value="3"] {
+	background-color: lightcoral;
+}

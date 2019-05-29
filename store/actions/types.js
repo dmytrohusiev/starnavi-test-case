@@ -1,0 +1,14 @@
+export const FETCH_GAME_SETTINGS_START = "FETCH_GAME_SETTINGS_START";
+export const GAME_SETTINGS_FETCHED = "GAME_SETTINGS_FETCHED";
+export const SET_GAME_SETTINGS = "SET_GAME_SETTINGS";
+
+export const START_GAME = "START_GAME";
+export const GAME_OVER = "GAME_OVER";
+
+// Leadersboard
+export const FETCH_WINNERS_START = "FETCH_WINNERS_START";
+export const FETCH_WINNERS_SUCCESS = "FETCH_WINNERS_SUCCESS";
+export const SEND_WINNER = "SEND_WINNER";
+
+// error handling
+export const GET_ERRORS = "GET_ERRORS";
