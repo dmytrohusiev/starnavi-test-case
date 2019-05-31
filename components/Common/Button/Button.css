@@ -28,15 +28,6 @@
 	background: linear-gradient(to right, rgb(104, 91, 160), rgb(180, 99, 133));
 }
 
-.Button:disabled {
-	background-color: darkgray;
-	cursor: not-allowed;
-}
-
-.Button:disabled:before {
-	background: linear-gradient(to right, red, orange);
-}
-
 .Button:hover:before {
 	margin: -3px;
 	animation: heartbeat 2.5s ease-in-out infinite both;

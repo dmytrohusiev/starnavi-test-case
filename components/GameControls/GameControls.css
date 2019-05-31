@@ -1,0 +1,21 @@
+.Error {
+	position: absolute;
+	width: 100%;
+	font-size: 0.75rem;
+	top: 110%;
+	left: 0;
+	color: #f26522;
+	text-align: left;
+	padding-left: inherit;
+}
+
+:global(.Select.Error > div) {
+	border-color: #f26522;
+}
+
+:global(.Select > div) {
+	border: 2px solid #2e3355;
+}
+:global(.Select > div:hover) {
+	border: 2px solid #727cbd;
+}

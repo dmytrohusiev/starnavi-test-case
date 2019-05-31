@@ -19,7 +19,10 @@ class GameTable extends Component {
 	state = {
 		playDeck: [],
 		computerCount: 0,
-		playerCount: 0
+		playerCount: 0,
+		x: null,
+		y: null,
+		countToWin: null
 	};
 
 	componentDidMount() {
@@ -39,19 +42,19 @@ class GameTable extends Component {
 	startGame = () => {
 		this.createPlayDeck();
 		this.resetCounters();
-		this.countToWin = Math.pow(this.props.field, 2) / 2;
+		this.setState({ countToWin: Math.pow(this.props.field, 2) / 2 });
 		this.intervalId = setInterval(this.gameSequense, this.props.delay);
 	};
 
 	gameSequense = () => {
-		if (this.x !== undefined) {
+		if (this.state.x) {
 			const isGameOver = this.checkResult();
 			if (isGameOver) {
 				return;
 			}
 		}
 		this.getRandomCellCoordinates();
-		const { y, x } = this;
+		const { y, x } = this.state;
 
 		const playDeck = this.state.playDeck.map(row => [...row]);
 
@@ -66,7 +69,7 @@ class GameTable extends Component {
 		if (!this.props.isPlaying) {
 			return true;
 		}
-		const { x, y } = this;
+		const { x, y } = this.state;
 
 		const playDeck = this.state.playDeck.map(row => row.map(col => col));
 		let { computerCount, playerCount } = this.state;
@@ -80,7 +83,7 @@ class GameTable extends Component {
 		}
 		this.setState({ playDeck, computerCount, playerCount });
 
-		if (computerCount > this.countToWin || playerCount > this.countToWin) {
+		if (computerCount > this.state.countToWin || playerCount > this.state.countToWin) {
 			clearInterval(this.intervalId);
 			this.props.gameOver(computerCount < playerCount ? this.props.name : "Computer AI");
 			return true;
@@ -92,10 +95,9 @@ class GameTable extends Component {
 		const { field } = this.props;
 		const row = Math.floor(Math.random() * field);
 		const column = Math.floor(Math.random() * field);
-		const { playDeck } = this.state;
+		const playDeck = this.state.playDeck.map(row => row.map(col => col));
 		if (playDeck[row][column] === 0) {
-			this.y = row;
-			this.x = column;
+			this.setState({ x: column, y: row });
 		} else {
 			this.getRandomCellCoordinates();
 		}
@@ -106,16 +108,14 @@ class GameTable extends Component {
 		if (value === "1") {
 			const row = currentTarget.getAttribute("data-row");
 			const col = currentTarget.getAttribute("data-col");
-			const playDeck = this.state.playDeck.map(row => [...row]);
+			const playDeck = this.state.playDeck.map(row => row.map(col => col));
 			playDeck[row][col] = 2;
 			this.setState({ playDeck });
 		}
 	};
 
 	resetCounters = () => {
-		this.setState({ computerCount: 0, playerCount: 0 });
-		delete this.x;
-		delete this.y;
+		this.setState({ computerCount: 0, playerCount: 0, x: null, y: null });
 	};
 
 	render() {

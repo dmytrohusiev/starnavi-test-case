@@ -5,8 +5,6 @@ import propTypes from "prop-types";
 const materialInput = props => {
 	const {
 		className,
-		iconName,
-		iconClass,
 		name,
 		value,
 		onChange,
@@ -17,11 +15,7 @@ const materialInput = props => {
 		autocomplete,
 		...rest
 	} = props;
-	let wrapperClasses = [
-		classes.Container,
-		value !== "" ? classes.Active : "",
-		iconClass ? "" : classes.NoIcon
-	];
+	let wrapperClasses = [classes.Container, value !== "" ? classes.Active : ""];
 
 	if (className) {
 		if (Array.isArray(className)) {
@@ -40,9 +34,6 @@ const materialInput = props => {
 	return (
 		<>
 			<div className={wrapperClasses.join(" ")}>
-				{iconClass && (
-					<i className={[iconClass, classes.Icon].join(" ")}>{iconName ? iconName : ""}</i>
-				)}
 				<input
 					type={type || "text"}
 					id={name}
@@ -68,8 +59,6 @@ const materialInput = props => {
 
 materialInput.propTypes = {
 	className: propTypes.array,
-	iconName: propTypes.string,
-	iconClass: propTypes.string,
 	name: propTypes.string.isRequired,
 	value: propTypes.string.isRequired,
 	onChange: propTypes.func.isRequired,

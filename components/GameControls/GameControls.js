@@ -8,6 +8,8 @@ import Select from "react-select";
 import Input from "../Common/Input/Input";
 import Button from "../Common/Button/Button";
 
+import classes from "./GameControls.css";
+
 class GameControls extends Component {
 	static propTypes = {
 		gameSettings: PropTypes.array.isRequired,
@@ -27,7 +29,7 @@ class GameControls extends Component {
 	};
 
 	handleGameModeChange = value => {
-		this.setState({ selectedGameMode: value });
+		this.setState({ selectedGameMode: value, errors: { ...this.state.errors, gameMode: null } });
 		this.props.setGameSettings(value);
 	};
 
@@ -53,7 +55,21 @@ class GameControls extends Component {
 	};
 
 	onFocus = ({ currentTarget }) => {
-		this.setState({ errors: { ...this.state.errors, [currentTarget.name]: null } });
+		this.setState({
+			errors: {
+				...this.state.errors,
+				[currentTarget.name || currentTarget.getAttribute("name")]: null
+			}
+		});
+	};
+
+	removeSelectError = () => {
+		this.setState({
+			errors: {
+				...this.state.errors,
+				gameMode: null
+			}
+		});
 	};
 	render() {
 		const { gameSettings, isGameOver, isPlaying } = this.props;
@@ -66,10 +82,12 @@ class GameControls extends Component {
 						options={gameSettings}
 						placeholder="Pick game mode"
 						onChange={this.handleGameModeChange}
-						className="Select"
+						className={["Select", errors.gameMode ? "Error" : ""].join(" ")}
 						value={selectedGameMode}
 						isDisabled={isPlaying}
+						onFocus={this.removeSelectError}
 					/>
+					{errors.gameMode && <p className={classes.Error}>{errors.gameMode}</p>}
 				</div>
 				<div className="col-12 col-md-4 mb-2">
 					<Input
@@ -77,26 +95,14 @@ class GameControls extends Component {
 						value={name}
 						onChange={this.handleNameChange}
 						label="Enter your name"
-						disabled={isPlaying}
+						readOnly={isPlaying}
 						errors={errors.name}
 						onFocus={this.onFocus}
 					/>
 				</div>
 				<div className="col-12 col-md-2 mb-2">
-					<Button
-						onClick={this.startGame}
-						label={isGameOver ? "Play again" : "Play"}
-						disabled={isPlaying || !selectedGameMode || name === ""}
-					/>
+					<Button onClick={this.startGame} label={isGameOver ? "Play again" : "Play"} />
 				</div>
-				<style jsx global>{`
-					.Select > div {
-						border: 2px solid #2e3355;
-					}
-					.Select > div:hover {
-						border: 2px solid #727cbd;
-					}
-				`}</style>
 			</div>
 		);
 	}
